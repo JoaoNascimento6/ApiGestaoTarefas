@@ -1,0 +1,18 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "pattern": "[^@ \t\r\n]+@[^@ \t\r\n]+[^@ \t\r\n]+"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
