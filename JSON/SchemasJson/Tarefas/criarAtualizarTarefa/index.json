@@ -7,7 +7,7 @@
             "properties": {
                 "tarefaId": {
                     "type": "string",
-                    "description": "id unico da tarefa"
+                    "format": "uuid"
                 },
                 "título": {
                     "type": "string",
@@ -33,8 +33,8 @@
                     "type": "string",
                     "enum": [
                         "concluido",
-                        "emProgresso",
-                        "futuro"
+                        "Hoje",
+                        "Agendado"
                     ],
                     "description": "O estado da tarefa (concluido, em progresso ou futuro)."
                 }
