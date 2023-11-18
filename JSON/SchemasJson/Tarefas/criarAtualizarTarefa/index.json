@@ -6,7 +6,8 @@
             "type": "object",
             "properties": {
                 "tarefaId": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "id unico da tarefa"
                 },
                 "título": {
                     "type": "string",
