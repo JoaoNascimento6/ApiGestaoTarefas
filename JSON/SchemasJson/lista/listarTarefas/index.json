@@ -1,0 +1,25 @@
+{
+    "tarefas": [
+      {
+        "nome": "Comprar mantimentos",
+        "descricao": "Ir ao supermercado e comprar itens essenciais",
+        "dataVencimento": "2023-11-30",
+        "estado": "Agendado",
+        "prioridade": "20"
+      },
+      {
+        "nome": "Limpar a casa",
+        "descricao": "Limpar o quato, a sala e a cozinha",
+        "dataVencimento": "2023-11-20",
+        "estado": "Agendado",
+        "prioridade": "10"
+      },
+      {
+        "nome": "Passear o cão",
+        "descricao": "Depois do trabalho ir passear o cão à rua",
+        "dataVencimento": "2023-11-20",
+        "estado": "Agendado",
+        "prioridade": "19"
+      }
+    ]
+  }
