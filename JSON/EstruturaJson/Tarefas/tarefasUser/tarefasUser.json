@@ -1,40 +1,24 @@
 {
-    "utilizadores": [
-        {
-            "id": 1,
-            "nome": "João",
-            "tarefas": [
-                {
-                    "id": 1,
-                    "nome": "Comprar mantimentos",
-                    "descricao": "Ir ao supermercado e comprar itens essenciais",
-                    "dataVencimento": "2023-11-30",
-                    "estado": "Agendado",
-                    "prioridade": "20"
-                },
-                {
-                    "id": 2,
-                    "nome": "Limpar a casa",
-                    "descricao": "Limpar o quato, a sala e a cozinha",
-                    "dataVencimento": "2023-11-20",
-                    "estado": "Agendado",
-                    "prioridade": "10"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "nome": "Maria",
-            "tarefas": [
-                {
-                    "id": 2,
-                    "nome": "Limpar a casa",
-                    "descricao": "Limpar o quato, a sala e a cozinha",
-                    "dataVencimento": "2023-11-20",
-                    "estado": "Agendado",
-                    "prioridade": "10"
-                }
-            ]
-        }
-    ]
+    "tarefasUser": {
+        "userId": "550e8400-e29b-41d4-a716-446655440012",
+        "nome": "João",
+        "tarefas": [
+            {
+                "tarefaId": "550e8400-e29b-41d4-a716-446655440002",
+                "titulo": "Comprar mantimentos",
+                "descricao": "Ir ao supermercado e comprar itens essenciais",
+                "dataVencimento": "2023-11-30",
+                "estado": "Agendado",
+                "prioridade": 20
+            },
+            {
+                "tarefaId": "550e8400-e29b-41d4-a716-446655440003",
+                "titulo": "Limpar a casa",
+                "descricao": "Limpar o quarto, a sala e a cozinha",
+                "dataVencimento": "2023-11-20",
+                "estado": "Agendado",
+                "prioridade": 10
+            }
+        ]
+    }
 }

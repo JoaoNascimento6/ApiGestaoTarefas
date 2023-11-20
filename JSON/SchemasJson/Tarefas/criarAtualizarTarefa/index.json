@@ -9,6 +9,11 @@
                     "type": "string",
                     "format": "uuid"
                 },
+                "userId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "O ID do usuário associado à tarefa."
+                },
                 "título": {
                     "type": "string",
                     "minLength": 1,
@@ -40,6 +45,7 @@
                 }
             },
             "required": [
+                "userId",
                 "título",
                 "dataVencimento",
                 "prioridade",
