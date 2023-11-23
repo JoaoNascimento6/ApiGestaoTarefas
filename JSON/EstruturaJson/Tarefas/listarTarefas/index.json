@@ -1,44 +1,28 @@
 {
-    "tarefas": [
-      {
-        "tarefaId": "ABCDEFGHIJKLMNOPQ",
-        "titulo": "gym",
-        "descricao": "ABCDEFGHI",
-        "estado": "concluido",
-        "dataVencimento": "ABCDEFGHIJKLMNOPQRSTUVW",
-        "prioridade": 12
-      },
-      {
-        "tarefaId": "ABCDEFGHIJKLMNOP",
-        "titulo": "desenhar",
-        "descricao": "ABCDEFGHIJKL",
-        "estado": "Hoje",
-        "dataVencimento": "ABCDEFGHIJK",
-        "prioridade": 16
-      },
-      {
-        "tarefaId": "ABCDEFGHIJKLMNOPQR",
-        "titulo": "limpar",
-        "descricao": "ABCDEFGHIJKLMNOPQRSTUVW",
-        "estado": "Hoje",
-        "dataVencimento": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "prioridade": 19
-      },
-      {
-        "tarefaId": "ABCDEFGHIJKLMNOPQRS",
-        "titulo": "arrumar",
-        "descricao": "ABCDE",
-        "estado": "Hoje",
-        "dataVencimento": "ABCD",
-        "prioridade": 19
-      },
-      {
-        "tarefaId": "ABCDEFGHIJKLMNOPQ",
-        "titulo": "Fazer",
-        "descricao": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "estado": "concluido",
-        "dataVencimento": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "prioridade": 3
-      }
-    ]
-  }
+  "tarefas": [
+    {
+      "tarefaId": "550e8400-e29b-41d4-a716-446655440000",
+      "nome": "Comprar mantimentos",
+      "descricao": "Ir ao supermercado e comprar itens essenciais",
+      "dataVencimento": "2023-11-30",
+      "estado": "Agendado",
+      "prioridade": 20
+    },
+    {
+      "tarefaId": "550e8400-e29b-41d4-a716-446655440001",
+      "nome": "Limpar a casa",
+      "descricao": "Limpar o quarto, a sala e a cozinha",
+      "dataVencimento": "2023-11-20",
+      "estado": "Agendado",
+      "prioridade": 10
+    },
+    {
+      "tarefaId": "550e8400-e29b-41d4-a716-446655440002",
+      "nome": "Passear o cão",
+      "descricao": "Depois do trabalho ir passear o cão à rua",
+      "dataVencimento": "2023-11-20",
+      "estado": "Agendado",
+      "prioridade": 19
+    }
+  ]
+}

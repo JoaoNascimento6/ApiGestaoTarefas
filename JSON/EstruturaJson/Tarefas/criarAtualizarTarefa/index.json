@@ -1,10 +1,9 @@
 {
-    "tarefa": {
-        "tarefaId": "1",
-        "título": "Concluir Relatório Mensal",
-        "descrição": "Escrever um relatório sobre o desempenho mensal da equipe.",
-        "dataVencimento": "2023-11-30",
-        "prioridade": 15,
-        "estado": "concluido"
-    }
+    "tarefaId": "550e8400-e29b-41d4-a716-446655440044",
+    "userId":"550e8400-e29b-41d4-a716-446655440077",
+    "título": "Concluir Relatório Mensal",
+    "descrição": "Escrever um relatório sobre o desempenho mensal da equipe.",
+    "dataVencimento": "2023-11-30",
+    "prioridade": 15,
+    "estado": "concluido"
 }
