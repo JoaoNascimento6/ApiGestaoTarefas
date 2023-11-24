@@ -4,9 +4,12 @@ const fs = require('fs').promises;
 const app = express();
 const port = 3000;
 const autenticacaoMiddleware = require('./middleware/autenticacaoMiddleware');
+
 app.use(bodyParser.json());
 app.use(autenticacaoMiddleware);
+
 // Endpoint para login
+
 app.get('/api/login', async (req, res) => {
   try {
     const rawData = await fs.readFile('user/login/index.json', 'utf8');
