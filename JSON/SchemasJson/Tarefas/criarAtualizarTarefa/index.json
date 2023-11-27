@@ -53,6 +53,7 @@
         "título",
         "descrição",
         "dataVencimento",
-        "estado"
+        "estado",
+        "prioridade"
     ]
 }
