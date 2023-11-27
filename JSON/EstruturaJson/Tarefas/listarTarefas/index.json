@@ -1,27 +1,67 @@
 {
   "tarefas": [
     {
-      "tarefaId": "550e8400-e29b-41d4-a716-446655440000",
-      "nome": "Comprar mantimentos",
-      "descricao": "Ir ao supermercado e comprar itens essenciais",
-      "dataVencimento": "2023-11-30",
-      "estado": "Agendado",
-      "prioridade": 20
+      "tarefaId": "b109aBEF-B47D-47e2-aabC-Dc4CcDE2e5C9",
+      "título": "ABCDEFGHIJKL",
+      "descrição": "ABCDEFGHIJ",
+      "estado": "concluido",
+      "dataVencimento": "ABCDEFG",
+      "prioridade": 14
     },
     {
-      "tarefaId": "550e8400-e29b-41d4-a716-446655440001",
-      "nome": "Limpar a casa",
-      "descricao": "Limpar o quarto, a sala e a cozinha",
-      "dataVencimento": "2023-11-20",
+      "tarefaId": "82BbcF4f-f3F5-5296-8A3B-1bd840CF1b3b",
+      "título": "ABCDEFGHIJKLMN",
+      "descrição": "ABCDEFGHIJKLMNO",
       "estado": "Agendado",
+      "dataVencimento": "ABCDEFGHI",
+      "prioridade": 1
+    },
+    {
+      "tarefaId": "c7b0C4E8-c2f2-1abD-8BD7-C484bEbdFB4a",
+      "título": "ABCDE",
+      "descrição": "ABCDEFGHIJKL",
+      "estado": "Hoje",
+      "dataVencimento": "ABCDEFGH",
+      "prioridade": 8
+    },
+    {
+      "tarefaId": "0eC1F10a-ebdA-1b51-BFE6-a7A734ec86dD",
+      "título": "ABCDEFGHIJKLMNO",
+      "descrição": "ABCDEFGHIJKLMNOPQRSTUVWXYZABC",
+      "estado": "Agendado",
+      "dataVencimento": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      "prioridade": 18
+    },
+    {
+      "tarefaId": "5aa6aBD1-5Cbc-1C9B-beeB-E1bED4CfA69B",
+      "título": "ABCDEFGHIJKLMNOPQRSTUVWX",
+      "descrição": "ABCDEFGHIJKLM",
+      "estado": "Agendado",
+      "dataVencimento": "ABCDEFGHIJK",
+      "prioridade": 9
+    },
+    {
+      "tarefaId": "Ef33f356-0D4c-50B3-9Cdc-de5EB690beFE",
+      "título": "ABCDEFGHIJKLMNOPQ",
+      "descrição": "ABCDEFGHIJKLMNOPQRSTU",
+      "estado": "concluido",
+      "dataVencimento": "ABCDEFGHI",
       "prioridade": 10
     },
     {
-      "tarefaId": "550e8400-e29b-41d4-a716-446655440002",
-      "nome": "Passear o cão",
-      "descricao": "Depois do trabalho ir passear o cão à rua",
-      "dataVencimento": "2023-11-20",
+      "tarefaId": "cf5D8dF1-d40f-52A9-A9ef-AFBb83Abd4b6",
+      "título": "ABCDEFGHIJKLMNOPQ",
+      "descrição": "ABCDEFGHIJKLMNOPQ",
       "estado": "Agendado",
+      "dataVencimento": "ABCD",
+      "prioridade": 1
+    },
+    {
+      "tarefaId": "8b0F6ab1-9DFB-2e88-B69B-8edE9fbea91a",
+      "título": "ABCDEFGHIJKLMNOPQRSTUVWXYZAB",
+      "descrição": "ABCDEFGHIJKLMNOPQRSTUVW",
+      "estado": "concluido",
+      "dataVencimento": "ABCDEFGHIJKLMN",
       "prioridade": 19
     }
   ]

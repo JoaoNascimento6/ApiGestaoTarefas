@@ -1,0 +1,24 @@
+{
+    "tarefasUser": {
+        "userId": "550e8400-e29b-41d4-a716-446655440012",
+        "nome": "João",
+        "tarefas": [
+            {
+                "tarefaId": "c7b0C4E8-c2f2-1abD-8BD7-C484bEbdFB4a",
+                "título": "ABCDE",
+                "descrição": "ABCDEFGHIJKL",
+                "estado": "Hoje",
+                "dataVencimento": "ABCDEFGH",
+                "prioridade": 8
+            },
+            {
+                "tarefaId": "c7b0C4E8-c2f2-1abD-8BD7-C484bEbdFB4a",
+                "título": "ABCDE",
+                "descrição": "ABCDEFGHIJKL",
+                "estado": "Hoje",
+                "dataVencimento": "ABCDEFGH",
+                "prioridade": 8
+            }
+        ]
+    }
+}

@@ -6,52 +6,16 @@
       "type": "object",
       "properties": {
         "userId": {
-          "type": "string"
+          "type": "string",
+          "format": "uuid",
+          "description": "O ID do usuário associado à tarefa.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
         },
         "nome": {
           "type": "string"
         },
         "tarefas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "tarefaId": {
-                "type": "string"
-              },
-              "titulo": {
-                "type": "string"
-              },
-              "descricao": {
-                "type": "string"
-              },
-              "dataVencimento": {
-                "type": "string",
-                "format": "date"
-              },
-              "estado": {
-                "type": "string",
-                "enum": [
-                  "concluido",
-                  "Hoje",
-                  "Agendado"
-                ]
-              },
-              "prioridade": {
-                "type": "integer",
-                "minimum": 0,
-                "maximum": 20
-              }
-            },
-            "required": [
-              "tarefaId",
-              "titulo",
-              "descricao",
-              "dataVencimento",
-              "estado",
-              "prioridade"
-            ]
-          }
+          "$ref": "../Tarefas/criarAtualizarTarefa/index.json"
         }
       },
       "required": [

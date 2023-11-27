@@ -2,58 +2,57 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "tarefa": {
-            "type": "object",
-            "properties": {
-                "tarefaId": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "userId": {
-                    "type": "string",
-                    "format": "uuid",
-                    "description": "O ID do usuário associado à tarefa."
-                },
-                "título": {
-                    "type": "string",
-                    "minLength": 5,
-                    "maxLength": 40,
-                    "description": "O título da tarefa."
-                },
-                "descrição": {
-                    "type": "string",
-                    "description": "A descrição da tarefa."
-                },
-                "dataVencimento": {
-                    "type": "string",
-                    "format": "date",
-                    "description": "A data de vencimento da tarefa (ISO 8601)."
-                },
-                "prioridade": {
-                    "type": "integer",
-                    "pattern": "[0-9]+",
-                    "minimum": 0,
-                    "maximum": 20,
-                    "description": "A prioridade da tarefa (de 0 a 20)."
-                },
-                "estado": {
-                    "type": "string",
-                    "enum": [
-                        "concluido",
-                        "Hoje",
-                        "Agendado"
-                    ],
-                    "description": "O estado da tarefa (concluido, em progresso ou futuro)."
-                }
-            },
-            "required": [
-                "userId",
-                "título",
-                "dataVencimento",
-                "prioridade",
-                "estado",
-                "descrição"
-            ]
+        "tarefaId": {
+            "type": "string",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "O ID do usuário associado à tarefa.",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+        },
+        "título": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 30,
+            "description": "O título da tarefa."
+        },
+        "descrição": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200,
+            "description": "A descrição da tarefa."
+        },
+        "dataVencimento": {
+            "type": "string",
+            "format": "date",
+            "description": "A data de vencimento da tarefa (ISO 8601)."
+        },
+        "prioridade": {
+            "type": "integer",
+            "pattern": "[0-9]+",
+            "minimum": 0,
+            "maximum": 20,
+            "description": "A prioridade da tarefa (de 0 a 20)."
+        },
+        "estado": {
+            "type": "string",
+            "enum": [
+                "concluido",
+                "Hoje",
+                "Agendado"
+            ],
+            "description": "O estado da tarefa (concluido, em progresso ou futuro)."
         }
-    }
+    },
+    "required": [
+        "userId",
+        "tarefaId",
+        "título",
+        "descrição",
+        "dataVencimento",
+        "estado"
+    ]
 }
