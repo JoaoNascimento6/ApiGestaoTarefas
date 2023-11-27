@@ -1,20 +1,31 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); //módulo NPM
+const config = require('./config.js'); //ficheiro de configuração
 
-const verificarToken = (req, res, next) => {
-  const token = req.headers.authorization;
-
-  if (!token) {
-    return res.status(401).send('Token de autenticação não fornecido');
-  }
-
-  jwt.verify(token, 'segredo', (err, decoded) => {
-    if (err) {
-      return res.status(401).send('Token de autenticação inválido');
+let checkToken = (req, res, next) => {
+    let token = req.headers['x-access-token'] || req.headers['authorization'];
+    if (token.startsWith('Bearer ')) {
+        token = token.slice(7, token.length); //remove a palavra ‘Bearer ’
     }
-
-    req.usuario = decoded.usuario;
-    next();
-  });
+    if (token) {
+        jwt.verify(token, config.jwtSecret, (err, decoded) => {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'O token invalido.'
+                });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+    } else {
+        return res.json({
+            success: false,
+            message: 'Token indisponível.'
+        });
+    }
 };
 
-module.exports = verificarToken;
+module.exports = {
+    checkToken: checkToken
+}

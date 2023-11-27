@@ -16,7 +16,8 @@
                 },
                 "título": {
                     "type": "string",
-                    "minLength": 1,
+                    "minLength": 5,
+                    "maxLength": 40,
                     "description": "O título da tarefa."
                 },
                 "descrição": {
@@ -30,6 +31,7 @@
                 },
                 "prioridade": {
                     "type": "integer",
+                    "pattern": "[0-9]+",
                     "minimum": 0,
                     "maximum": 20,
                     "description": "A prioridade da tarefa (de 0 a 20)."

@@ -13,10 +13,13 @@
             },
             "titulo": {
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "maxLength": 100
             },
             "descricao": {
-              "type": "string"
+              "type": "string",
+              "minLength": 40,
+              "maxLength": 100
             },
             "estado": {
               "type": "string",

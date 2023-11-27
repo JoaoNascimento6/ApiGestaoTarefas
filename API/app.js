@@ -1,12 +1,29 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs').promises;
 const app = express();
-const port = 3000;
+const fs = require('fs').promises;
+const userRoute = require('./routes/userRoute.js')
 const autenticacaoMiddleware = require('./middleware/autenticacaoMiddleware');
 
-app.use(bodyParser.json());
+//Configurações
+app.set('port', process.env.PORT || 3000);
+
 app.use(autenticacaoMiddleware);
+
+// Configurar CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
+
+//Middlewares
+app.use(express.json());
+//rotas
+app.use('/user', userRoute);
+
 
 // Endpoint para login
 
