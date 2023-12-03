@@ -1,14 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const app = express();
 const port = 3000;
+
 const autenticacaoMiddleware = require('./middleware/autenticacaoMiddleware');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(autenticacaoMiddleware);
 
-// Endpoint para login
+/*/ Endpoint para login
 
 app.get('/api/login', async (req, res) => {
   try {
@@ -67,8 +70,8 @@ app.post('/api/tarefasUser', async (req, res) => {
     console.error(error);
     res.status(500).send('Erro ao obter dados de associar tarefa a usuário.');
   }
-});
+});*/
 
 app.listen(port, () => {
-  console.log(`Servidor de olhao na porta ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
