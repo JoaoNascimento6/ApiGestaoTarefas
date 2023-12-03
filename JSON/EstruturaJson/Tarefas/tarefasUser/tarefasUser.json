@@ -1,7 +1,6 @@
 {
     "tarefasUser": {
         "userId": "550e8400-e29b-41d4-a716-446655440012",
-        "nome": "João",
         "tarefas": [
             {
                 "tarefaId": "550e8400-e29b-41d4-a716-446655440002",
