@@ -1,77 +1,117 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const fs = require('fs').promises;
+const jwt = require('jsonwebtoken');
+const verificarToken = require('./path-to-your-middleware');
+
 const app = express();
 const port = 3000;
 
-const autenticacaoMiddleware = require('./middleware/autenticacaoMiddleware');
-
-app.use(cors());
 app.use(bodyParser.json());
-app.use(autenticacaoMiddleware);
 
-/*/ Endpoint para login
+const tasks = [];
+const predefinedTasks = [];
+const users = [];
 
-app.get('/api/login', async (req, res) => {
-  try {
-    const rawData = await fs.readFile('user/login/index.json', 'utf8');
-    const dados = JSON.parse(rawData);
-    res.status(200).json(dados);  // Use status(200) para indicar sucesso
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter dados de login.');
+// OpenAPI definition
+// ...
+
+app.use(['/tarefas/:tarefaId', '/tarefa', '/listartarefasPadrao', '/api/tarefasUsers/:UserId', '/User', '/User/logout', '/User/:email'], verificarToken);
+
+// Define endpoints
+app.delete('/tarefas/:tarefaId', (req, res) => {
+  const { tarefaId } = req.params;
+  const tarefas = tarefas.findIndex(tarefa => tarefa.id === tarefaId);
+  if (tarefaId === -1) {
+    return res.status(404).send('Tarefa não encontrada.');
   }
+  const deletedtarefa = tasks.splice(tarefaIndex, 1)[0];
+  res.status(204).send(deletedtarefa);
 });
 
-// Endpoint para registro
-app.post('/api/registo', async (req, res) => {
-  try {
-    const rawData = await fs.readFile('user/registo/index.json', 'utf8');
-    const dados = JSON.parse(rawData);
-    res.status(201).json(dados);  // Use status(201) para indicar criação bem-sucedida
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter dados de registro.');
-  }
+app.get('/tarefas/:tarefaId', (req, res) => {
+  const { tarefaId } = req.params;
+  // Implementation for getting task details by ID
+  // ...
+
+  res.status(200).json({ /* task details */ });
 });
 
-// Endpoint para atualizar/criar tarefa
-app.post('/api/atualizarcriartarefa', async (req, res) => {
-  try {
-    const rawData = await fs.readFile('Tarefas/criarAtualizarTarefas/index.json', 'utf8');
-    const dados = JSON.parse(rawData);
-    res.status(200).json(dados);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter dados de atualizar/criar tarefa.');
-  }
+app.put('/tarefas/:tarefaId', (req, res) => {
+  const { tarefaId } = req.params;
+  // Implementation for updating a task by ID
+  // ...
+
+  res.status(200).json({ /* updated task details */ });
 });
 
-// Endpoint para listar tarefas
-app.get('/api/listartarefas', async (req, res) => {
-  try {
-    const rawData = await fs.readFile('Tarefas/listarTarefas/index.json', 'utf8');
-    const dados = JSON.parse(rawData);
-    res.status(200).json(dados);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter dados de listar tarefas.');
-  }
+app.post('/tarefa', (req, res) => {
+  // Implementation for creating a new task
+  // ...
+
+  res.status(201).send();
 });
 
-// Endpoint para associar tarefa a usuário
-app.post('/api/tarefasUser', async (req, res) => {
-  try {
-    const rawData = await fs.readFile('Tarefas/tarefasUser/index.json', 'utf8');
-    const dados = JSON.parse(rawData);
-    res.status(200).json(dados);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter dados de associar tarefa a usuário.');
-  }
-});*/
+app.get('/listartarefasPadrao', (req, res) => {
+  // Implementation for getting a list of predefined tasks
+  // ...
 
+  res.status(200).json({ /* list of predefined tasks */ });
+});
+
+app.post('/api/tarefasUsers/:UserId', (req, res) => {
+  const { UserId } = req.params;
+  // Implementation for associating a task with a user
+  // ...
+
+  res.status(201).send();
+});
+
+app.post('/User', (req, res) => {
+  // Implementation for creating a new user
+  // ...
+
+  res.status(200).send();
+});
+
+app.get('/User/login', (req, res) => {
+  // Implementation for user login
+  // ...
+
+  res.status(200).json({ /* token or success message */ });
+});
+
+app.get('/User/logout', (req, res) => {
+  // Implementation for user logout
+  // ...
+
+  res.status(200).send();
+});
+
+app.get('/User/:email', (req, res) => {
+  const { email } = req.params;
+  // Implementation for getting user by email
+  // ...
+
+  res.status(200).json({ /* user details */ });
+});
+
+app.delete('/User/:email', (req, res) => {
+  const { email } = req.params;
+  // Implementation for deleting user by email
+  // ...
+
+  res.status(200).send();
+});
+
+app.patch('/User/:email', (req, res) => {
+  const { email } = req.params;
+  // Implementation for updating user by email
+  // ...
+
+  res.status(200).send();
+});
+
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
