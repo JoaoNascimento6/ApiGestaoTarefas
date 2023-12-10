@@ -1,0 +1,828 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Task Manager
+  description: Manage your life with TOdo
+paths:
+
+  /dashboard/{userId}:
+#listar tarefas do user
+    get:
+      tags: 
+        - Dashboard
+      description: Dashboard da app
+      parameters: 
+      - in: path
+        name: userId
+        required: true
+        schema:
+          $ref: "#/components/schemas/userId"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        '400':
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        '404':
+          description: Recurso não encontrado.
+        '500':
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas
+      security:
+        - BearerAuth: []
+        
+#Criar tarefas do user agrupadas por estado
+    post:
+      tags:
+        - Dashboard
+      description: Endpoint para criar uma nova tarefa.
+      parameters: 
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tarefa"
+        required: true
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Criar uma nova tarefa
+      security:
+        - BearerAuth: []     
+        
+  /dashboard/estado/{userId}/{estado}:
+#listar tarefas do user agrupadas por estado 
+    get:
+      tags:
+        - Dashboard
+      description: Endpoint para listar tarefas do usuário agrupadas por estado
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+          description: ID do user
+        - in: path
+          name: estado
+          required: true
+          schema:
+            type: string  # Certifique-se de ajustar o tipo conforme necessário
+          description: Estado da tarefa
+      responses:
+        "201":
+          description: Sucesso. Retorno da tarefa.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/tarefa"
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas ordenadas e agrupadas por mês
+      security:
+        - BearerAuth: []
+        
+  /dashboard/{userId}/{estado}/{tarefaId}:
+    # Atualizar o estado de uma tarefa
+    patch:
+      tags:
+        - Dashboard
+      description: Endpoint para atualizar o estado de uma tarefa do usuário.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+          description: ID do usuário
+        - in: path
+          name: estado
+          required: true
+          schema:
+            type: string
+          description: Estado da tarefa
+        - in: path
+          name: tarefaId
+          required: true
+          schema:
+            $ref: "#/components/schemas/tarefaId"
+          description: ID da tarefa
+      responses:
+        '200':
+          description: Sucesso. Retorno da tarefa atualizada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        '401':
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        '501':
+          description: Erro interno do servidor.
+      summary: Atualizar o estado de uma tarefa
+      security:
+        - BearerAuth: []
+
+  /dashboard/data/{userId}/{dataVencimento}:
+    # Listar tarefas do usuário ordenadas por data de vencimento
+    get:
+      tags:
+        - Dashboard
+      description: Endpoint para listar tarefas do usuário ordenadas por data de vencimento
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+          description: ID do user
+        - in: path
+          name: dataVencimento
+          required: true
+          schema:
+            type: string
+          description: Data de vencimento da tarefa
+      responses:
+        '201':
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/tarefa"
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas ordenadas e agrupadas por mês
+      security:
+        - BearerAuth: [] 
+      
+  /dashboard/prioridade/{userId}/{prioridade}:
+    # Listar tarefas do usuário ordenadas por prioridade
+    get:
+      tags:
+        - Dashboard
+      description: Endpoint para listar tarefas do usuário ordenadas por prioridade
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+          description: ID do usuário
+        - in: path
+          name: prioridade
+          required: true
+          schema:
+            type: integer
+          description: Prioridade da tarefa
+      responses:
+        '201':
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/tarefa"
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas ordenadas e agrupadas por prioridade
+      security:
+        - BearerAuth: []
+      
+  /dashboard/todas/{userId}:
+    # Listar tarefas do usuário ordenadas e agrupadas por mês
+    get:
+      tags:
+        - Dashboard
+      description: Endpoint para listar todas as tarefas do usuário ordenadas e agrupadas por mês
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+          description: ID do usuário
+      responses:
+        '201':
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/tarefa"
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas ordenadas e agrupadas por mês
+      security:
+        - BearerAuth: []  
+  
+  /dashboard/{userId}/{tarefaId}:
+  #Pesquisa de tarefa pelo id
+    get:
+      tags:
+        - Dashboard
+      description: Dashboard da app
+      parameters: 
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+        - in: path
+          name: tarefaId
+          required: true
+          schema:
+            $ref: "#/components/schemas/tarefaId"
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        "400":
+          description: Requisição inválida. Verifique os   parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Ver todas as tarefas
+      security:
+        - BearerAuth: []
+      
+    put:
+      tags:
+        - Dashboard
+      description: Endpoint para atualizar uma tarefa existente.
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            $ref: "#/components/schemas/userId"
+        - in: path
+          name: tarefaId
+          required: true
+          schema:
+            $ref: "#/components/schemas/tarefaId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tarefa"
+        required: true
+      responses:
+        "200":
+          description: Atualizar uma tarefa apartir do ID
+          content:
+           application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Atualizar uma tarefa existente
+      security:
+        - BearerAuth: []      
+
+  /listartarefasPadrao/{tarefaId}:
+    #Listar Tarefas Predefinidas na App
+    get:
+      tags:
+      - Tarefas Padrão
+      summary: Get a list of predefined tasks
+      description: Returns all registered tasks
+      parameters:
+        - in: path
+          name: tarefaId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefasPadrao"
+        "404":
+          description: No tasks found
+      security:
+        - BearerAuth: []
+
+  /tarefasUsers/{UserId}/{tarefaId}:
+    #Associar uma tarefa a um User      
+    post:
+      tags:
+      - Tarefas Padrão
+      description: Endpoint para adicionar uma tarefa padrao a um User.
+      parameters:
+        - in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: path
+          name: tarefaId  # Define the path parameter here
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tarefasUser"
+        required: true
+      responses:
+        "201":
+          description: Tarefa criada com sucesso.
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Criar uma nova tarefa
+      security:
+        - BearerAuth: []
+      
+  /User:
+    post:
+      tags:
+      - User
+      summary: Criar User
+      description: Criação de um novo User
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: User criado com sucesso
+        "400":
+          description: Erro na criação de um User
+  /User/login:
+    get:
+      tags:
+      - User
+      summary: Login do User
+      operationId: loginUser
+      parameters:
+      - name: User
+        in: query
+        description: nome do User
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: palavra passe do User
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string 
+      responses:
+        "200":
+          description: Login efetuado com sucesso
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Login'
+        "400":
+          description: Parâmetros inválidos. Certifique-se de fornecer todos os valores obrigatórios.
+          content:
+            application/json:
+              example:
+                error: Parâmetros inválidos. Certifique-se de fornecer todos os valores obrigatórios.
+  /User/logout:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+      - User
+      summary: Logout do User
+      operationId: logoutUser
+      responses:
+        "200":
+          description: Logout efetuado com sucesso
+  /User/{email}:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+      - User
+      summary: Encontrar User
+      operationId: getUserByEmail
+      parameters:
+      - name: email
+        in: path
+        description: Necessário enviar o email do User pretendido
+        
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+
+      responses:
+        "200":
+          description: Enviado User com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não existe
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+      - User
+      summary: Eliminar User
+      description: Só consegue ser realizado por um User logado
+      operationId: deleteUser
+      parameters:
+      - name: email
+        in: path
+        description: Email necessário
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Elimiado com sucesso
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não encontrado
+    patch:
+      security:
+        - BearerAuth: []
+      tags:
+      - User
+      summary: Updated User
+      description: So consegue ser realizado por um User logado
+      operationId: updateUser
+      parameters:
+      - name: email
+        in: path
+        description: Email do User necessário
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: Atualizado User com sucesso
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não existe  
+  /tarefa:
+    #Criar uma tarefa
+    post:
+      tags:
+      - Admin
+      description: Endpoint para criar uma nova tarefa.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/tarefa"
+        required: true
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Criar uma nova tarefa
+      security:
+        - BearerAuth: []
+
+  /tarefas/{tarefaId}:
+    #Apargar uma tarefa apartir do seu ID
+    delete:
+      tags:
+      - Admin
+      description: Excluir uma tarefa existente apartir do ID.
+      parameters:
+        - in: path
+          name: tarefaId
+          required: true
+          schema:
+            $ref: '#/components/schemas/tarefaId'
+      responses:
+        "204":
+          description: Tarefa excluída com sucesso.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Excluir uma tarefa existente
+      security:
+        - BearerAuth: []
+        
+    #Listar uma tarefa apartir do seu ID  
+    get:
+      tags:
+      - Admin
+      description: Obter informações detalhadas sobre uma tarefa apartir do ID.
+      parameters:
+        - in: path
+          name: tarefaId
+          required: true
+          description: ID da tarefa que será atualizada
+          schema:
+            $ref: '#/components/schemas/tarefaId'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+          description: Informações detalhadas sobre a tarefa.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Obter informações sobre uma tarefa
+      security:
+        - BearerAuth: []
+        
+    #Atualizar uma tarefa apartir do seu Id 
+    put:
+      tags:
+        - Admin
+      description: Endpoint para atualizar uma tarefa existente.
+      parameters:
+        - in: path
+          name: tarefaId
+          required: true
+          description: ID da tarefa que será atualizada
+          schema:
+            $ref: '#/components/schemas/tarefaId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tarefa'     
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/tarefa"
+          description: Atualizar uma tarefa apartir do ID
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      summary: Atualizar uma tarefa existente  
+      security:
+        - BearerAuth: []        
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/JOAOPNASCIMENTO6/Todo/1.0
+    
+components:
+  schemas:
+#Criar, atualizar, ver , apagar uma tarefa
+    tarefa:
+      type: "object"
+      properties:
+        tarefaId:
+          type: "string"
+          format: "uuid"
+        userId:
+          type: "string"
+          format: "uuid"
+          description: "O ID do usuário associado à tarefa."
+        título:
+          type: "string"
+          minLength: 1
+          description: "O título da tarefa."
+        descrição:
+          type: "string"
+          description: "A descrição da tarefa."
+        dataVencimento:
+          type: "string"
+          format: "date"
+          description: "A data de vencimento da tarefa (ISO 8601)."
+        prioridade:
+          type: "integer"
+          minimum: 0
+          maximum: 20
+          description: "A prioridade da tarefa (de 0 a 20)."
+        estado:
+          type: "string"
+          enum:
+          - "concluido"
+          - "Hoje"
+          - "Agendado"
+          description: "O estado da tarefa (concluido, em progresso ou futuro)."
+      required:
+      - "userId"
+      - "título"
+      - "dataVencimento"
+      - "prioridade"
+      - "estado"
+      - "descrição"
+      example:
+        tarefaId: 550e8400-e29b-41d4-a716-446655440044
+        userId: 550e8400-e29b-41d4-a716-446655440077
+        título: Concluir Relatório Mensal
+        descrição: Escrever um relatório sobre o desempenho mensal da equipe
+        dataVencimento: 2023-11-30
+        prioridade: 15
+        estado: concluido 
+
+#Criar, editar e listar uma tarefa Padrao
+    tarefasPadrao:
+      items:
+        properties:
+          dataVencimento:
+            description: A data de vencimento da tarefa (ISO 8601).
+            format: date
+            type: string
+          descrição:
+            description: A descrição da tarefa.
+            maxLength: 200
+            minLength: 10
+            type: string
+          estado:
+            description: O estado da tarefa (concluído, em progresso ou futuro).
+            enum: ["concluido", "Hoje", "Agendado"]
+            type: string
+          prioridade:
+            description: A prioridade da tarefa (de 0 a 20).
+            maximum: 20
+            minimum: 0
+            pattern: ^[0-9]+$
+            type: integer
+          tarefaId:
+            format: uuid
+            pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+            type: string
+          título:
+            description: O título da tarefa.
+            maxLength: 30
+            minLength: 4
+            type: string
+        required:
+          - tarefaId
+          - título
+          - descrição
+          - estado
+          - dataVencimento
+          - prioridade
+      example:
+        tarefaId: 550e8400-e29b-41d4-a726-446655440044
+        título: Terminar Relatorio
+        descrição: Corrigir relatório sobre o desempenho mensal
+        dataVencimento: 2023-11-30
+        prioridade: 19
+        estado: Hoje   
+
+#Associar uma tarefa a um User
+    tarefasUser:
+      properties:
+        userId:
+          $ref: "#/components/schemas/User"
+        tarefasId:
+          $ref: "#/components/schemas/tarefa"
+      required:
+        - userId
+        - tarefasId
+      example:
+        userId: 550e5400-e29b-41d4-a726-446655440044
+        tarefas:
+          tarefaId: 550e8400-e29b-41d4-a726-446655440044
+
+#User - criar editar eliminar
+    User:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        nome:
+          type: string
+        apelido:
+          type: string
+        email:
+          pattern: '[^@ \t\r\n]+@[^@ \t\r\n]+[^@ \t\r\n]+'
+          type: string
+        password:
+          type: string
+        contacto:
+          pattern: 9[0-9]{2}[0-9]{3}[0-9]{3}$
+          type: string
+      example:
+        password: password
+        contacto: 912345678
+        apelido: apelido
+        nome: nome
+        email: email@hotmail.com
+        
+    userId:
+      required:
+        - UserId
+      type: object
+      properties:
+        userId:
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+      example:
+        userId: 550e5410-e29b-41d4-a726-446655440044
+        
+    tarefaId:
+      required:
+        - tarefaId
+      type: object
+      properties:
+        tarefaId:
+          format: uuid
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+      example:
+        tarefaId: 550e5400-e29b-41d4-a726-446665440044    
+        
+    Login:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          pattern: '[^@ \t\r\n]+@[^@ \t\r\n]+[^@ \t\r\n]+'
+          type: string
+        password:
+          type: string  
+      example:
+        email: email@hotmail.com~
+        password: password
+
+#Segurança
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
