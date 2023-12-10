@@ -1,0 +1,1027 @@
+openapi: 3.0.0
+info:
+  title: Task Manager
+  description: Manage your life with TOdo
+  version: "1.0"
+servers:
+- url: https://virtserver.swaggerhub.com/JOAOPNASCIMENTO6/Todo/1.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /listartarefas/{userId}:
+    get:
+      tags:
+      - Tarefa
+      description: Lista todas as tarefas do user logado.
+      operationId: listartarefasUserIdGET
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        example: 550e8400-e29b-41d4-a726-446655440044
+      responses:
+        "200":
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaDeTarefas'
+        "401":
+          description: Requisição inválida. Verifique os   parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /listartarefas/{userId}/{prioridade}:
+    get:
+      tags:
+      - Tarefa
+      description: Lista todas as tarefas por prioridade
+      operationId: listartarefasUserIdPrioridadeGET
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        example: 550e8400-e29b-41d4-a726-446655440044
+      - name: prioridade
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          enum:
+          - 20
+          - 19
+          - 18
+          - 17
+          - 16
+          - 15
+          - 14
+          - 13
+          - 12
+          - 11
+          - 10
+          - 9
+          - 8
+          - 7
+          - 6
+          - 5
+          - 4
+          - 3
+          - 2
+          - 1
+      responses:
+        "200":
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaDeTarefasPorPrioridade'
+        "401":
+          description: Requisição inválida. Verifique os   parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /listartarefas/{userId}/{dataVencimento}:
+    get:
+      tags:
+      - Tarefa
+      description: Lista todas as tarefas por prioridade
+      operationId: listartarefasUserIdDataVencimentoGET
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        example: 550e8400-e29b-41d4-a726-446655440044
+      - name: dataVencimento
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          description: Data de vencimento no formato YYYY-MM-DD
+          format: date
+      responses:
+        "200":
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaDeTarefasDataVencimento'
+        "401":
+          description: Requisição inválida. Verifique os   parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /listartarefas/{userId}/{Estado}:
+    get:
+      tags:
+      - Tarefa
+      description: Lista todas as tarefas por prioridade
+      operationId: listartarefasUserIdEstadoGET
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        example: 550e8400-e29b-41d4-a726-446655440044
+      - name: Estado
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Concluido
+          - Hoje
+          - Em Progresso
+          - Vencido
+      responses:
+        "200":
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaDeTarefasEstado'
+        "401":
+          description: Requisição inválida. Verifique os   parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+    patch:
+      tags:
+      - Tarefa
+      summary: Atualizar o estado de uma tarefa
+      description: Atualiza o estado de uma tarefa com base no ID do usuário e no
+        estado fornecido.
+      operationId: listartarefasUserIdEstadoPATCH
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+        example: 550e8400-e29b-41d4-a726-446655440044
+      - name: Estado
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          enum:
+          - Concluido
+          - Hoje
+          - Em Progresso
+          - Vencido
+      requestBody:
+        description: Objeto contendo as atualizações do estado da tarefa
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userId_Estado_body'
+        required: true
+      responses:
+        "200":
+          description: Tarefa atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listaDeTarefasEstado'
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "404":
+          description: Tarefa não encontrada
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /listartodas/{userId}:
+    get:
+      tags:
+      - Tarefa
+      summary: Ver todas as tarefas ordenadas e agrupadas por mês
+      description: Endpoint para listar todas as tarefas do usuário ordenadas e agrupadas
+        por mês
+      operationId: listartodasUserIdGET
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a726-446655440044
+      responses:
+        "201":
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/listaDeTodasTarefas'
+                x-content-type: application/json
+        "401":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "501":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /listartarefasPadrao/{tarefaId}:
+    get:
+      tags:
+      - TarefaPadrao
+      summary: Get a list of predefined tasks
+      description: Returns all registered tasks
+      operationId: listartarefasPadraoTarefaIdGET
+      parameters:
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tarefasPadrao'
+        "404":
+          description: No tasks found
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: TarefaPadrao
+    delete:
+      tags:
+      - TarefaPadrao
+      summary: Eliminar uma tarefa padrao por ID
+      description: Elimina uma tarefa registada pelo seu ID
+      operationId: listartarefasPadraoTarefaIdDELETE
+      parameters:
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Tarefa eliminada com sucesso
+        "403":
+          description: "Proibido, eliminação não autorizada"
+        "404":
+          description: Tarefa não encontrada
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: TarefaPadrao
+  /alterarTarefaPadrao/{tarefaId}/{dataVencimento}:
+    patch:
+      tags:
+      - TarefaPadrao
+      summary: Atualizar a descrição de uma tarefa por ID
+      description: Atualiza a descrição de uma tarefa registada pelo seu ID
+      operationId: alterarTarefaPadraoTarefaIdDataVencimentoPATCH
+      parameters:
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: dataVencimento
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Objeto contendo a nova descrição da tarefa
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tarefaId_dataVencimento_body'
+        required: true
+      responses:
+        "200":
+          description: Tarefa atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tarefasPadrao'
+        "403":
+          description: "Proibido, atualização não autorizada"
+        "404":
+          description: Tarefa não encontrada
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: TarefaPadrao
+  /tarefasUsers/{UserId}/{tarefaId}:
+    post:
+      tags:
+      - TarefaPadrao
+      summary: Criar uma nova tarefa
+      description: Associar uma tarefa padrao a um User.
+      operationId: tarefasUsersUserIdTarefaIdPOST
+      parameters:
+      - name: UserId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tarefaPadraosUser'
+        required: true
+      responses:
+        "201":
+          description: Tarefa criada com sucesso.
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: TarefaPadrao
+  /User:
+    post:
+      tags:
+      - User
+      summary: Criar User
+      description: Criação de um novo User
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: User criado com sucesso
+        "400":
+          description: Erro na criação de um User
+      x-swagger-router-controller: User
+  /User/login:
+    get:
+      tags:
+      - User
+      summary: Login do User
+      operationId: userLoginGET
+      parameters:
+      - name: User
+        in: query
+        description: nome do User
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: palavra passe do User
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Login efetuado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+        "400":
+          description: Parâmetros inválidos. Certifique-se de fornecer todos os valores
+            obrigatórios.
+          content:
+            application/json:
+              example:
+                error: Parâmetros inválidos. Certifique-se de fornecer todos os valores
+                  obrigatórios.
+      x-swagger-router-controller: User
+  /User/logout:
+    get:
+      tags:
+      - User
+      summary: Logout do User
+      operationId: userLogoutGET
+      responses:
+        "200":
+          description: Logout efetuado com sucesso
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: User
+  /User/{email}:
+    get:
+      tags:
+      - User
+      summary: Encontrar User
+      operationId: userEmailGET
+      parameters:
+      - name: email
+        in: path
+        description: Necessário enviar o email do User pretendido
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Enviado User com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não existe
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: User
+    delete:
+      tags:
+      - User
+      summary: Eliminar User
+      description: Só consegue ser realizado por um User logado
+      operationId: userEmailDELETE
+      parameters:
+      - name: email
+        in: path
+        description: Email necessário
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Elimiado com sucesso
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não encontrado
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: User
+    patch:
+      tags:
+      - User
+      summary: Updated User
+      description: So consegue ser realizado por um User logado
+      operationId: userEmailPATCH
+      parameters:
+      - name: email
+        in: path
+        description: Email do User necessário
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "200":
+          description: Atualizado User com sucesso
+        "400":
+          description: "Input {email} inválido"
+        "404":
+          description: User não existe
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: User
+  /tarefa:
+    post:
+      tags:
+      - Tarefa
+      summary: Criar uma nova tarefa
+      description: Endpoint para criar uma nova tarefa.
+      operationId: tarefaPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tarefa'
+        required: true
+      responses:
+        "201":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tarefa'
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "500":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+  /tarefas/{tarefaId}:
+    get:
+      tags:
+      - Tarefa
+      summary: Obter informações sobre uma tarefa
+      description: Obter informações detalhadas sobre uma tarefa apartir do ID.
+      operationId: tarefasTarefaIdGET
+      parameters:
+      - name: tarefaId
+        in: path
+        description: ID da tarefa que será atualizada
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/tarefaId'
+      responses:
+        "200":
+          description: Informações detalhadas sobre a tarefa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tarefa'
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+    put:
+      tags:
+      - Tarefa
+      summary: Atualizar uma tarefa existente
+      description: Endpoint para atualizar uma tarefa existente.
+      operationId: tarefasTarefaIdPUT
+      parameters:
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a726-446655440044
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tarefa'
+        required: true
+      responses:
+        "200":
+          description: Atualizar uma tarefa apartir do ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tarefa'
+        "400":
+          description: Requisição inválida. Verifique os parâmetros de entrada.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+    delete:
+      tags:
+      - Tarefa
+      summary: Excluir uma tarefa existente
+      description: Excluir uma tarefa existente apartir do ID.
+      operationId: tarefasTarefaIdDELETE
+      parameters:
+      - name: tarefaId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/tarefaId'
+      responses:
+        "204":
+          description: Tarefa excluída com sucesso.
+        "404":
+          description: Tarefa não encontrada.
+        "500":
+          description: Erro interno do servidor.
+      security:
+      - BearerAuth: []
+      x-swagger-router-controller: Tarefa
+components:
+  schemas:
+    tarefa:
+      required:
+      - dataVencimento
+      - descrição
+      - estado
+      - prioridade
+      - título
+      - userId
+      type: object
+      properties:
+        tarefaId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          description: O ID do usuário associado à tarefa.
+          format: uuid
+        título:
+          minLength: 1
+          type: string
+          description: O título da tarefa.
+        descrição:
+          type: string
+          description: A descrição da tarefa.
+        dataVencimento:
+          type: string
+          description: A data de vencimento da tarefa (ISO 8601).
+          format: date
+        prioridade:
+          maximum: 20
+          minimum: 0
+          type: integer
+          description: A prioridade da tarefa (de 0 a 20).
+        estado:
+          type: string
+          description: "O estado da tarefa (concluido, em progresso ou futuro)."
+          enum:
+          - concluido
+          - Hoje
+          - Agendado
+      example:
+        tarefaId: 550e8400-e29b-41d4-a716-446655440044
+        userId: 550e8400-e29b-41d4-a716-446655440077
+        título: Concluir Relatório Mensal
+        descrição: Escrever um relatório sobre o desempenho mensal da equipe
+        dataVencimento: 2023-11-30T00:00:00.000Z
+        prioridade: 15
+        estado: concluido
+    listaDeTarefas:
+      type: array
+      items:
+        $ref: '#/components/schemas/tarefa'
+    listaDeTarefasPorPrioridade:
+      required:
+      - prioridade
+      - tarefas
+      type: object
+      properties:
+        prioridade:
+          maximum: 20
+          minimum: 0
+          pattern: "^[0-9]+$"
+          type: integer
+          description: A prioridade da tarefa (de 0 a 20).
+        tarefas:
+          type: array
+          items:
+            $ref: '#/components/schemas/tarefa'
+      example:
+        prioridade: 1
+        tarefas:
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+    listaDeTarefasDataVencimento:
+      required:
+      - dataVencimento
+      - tarefas
+      type: object
+      properties:
+        dataVencimento:
+          type: string
+          description: A data de vencimento da tarefa (ISO 8601).
+          format: date
+        tarefas:
+          type: array
+          items:
+            $ref: '#/components/schemas/tarefa'
+      example:
+        tarefas:
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+        dataVencimento: 2000-01-23
+    listaDeTarefasEstado:
+      required:
+      - Estado
+      - tarefas
+      type: object
+      properties:
+        estado:
+          type: string
+          description: "O estado da tarefa (concluído, em progresso ou futuro)."
+          enum:
+          - concluido
+          - Hoje
+          - Agendado
+        tarefas:
+          type: array
+          items:
+            $ref: '#/components/schemas/tarefa'
+      example:
+        estado: concluido
+        tarefas:
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+        - tarefaId: 550e8400-e29b-41d4-a716-446655440044
+          userId: 550e8400-e29b-41d4-a716-446655440077
+          título: Concluir Relatório Mensal
+          descrição: Escrever um relatório sobre o desempenho mensal da equipe
+          dataVencimento: 2023-11-30T00:00:00.000Z
+          prioridade: 15
+          estado: concluido
+    listaDeTodasTarefas:
+      required:
+      - dataVencimento
+      - tarefas
+      type: object
+      properties:
+        dataVencimento:
+          type: string
+          description: A data de vencimento da tarefa (ISO 8601).
+          format: date
+        tarefas:
+          type: array
+          items:
+            $ref: '#/components/schemas/listaDeTodasTarefas_tarefas'
+      example:
+        tarefas:
+        - estado: concluido
+          título: título
+          tarefaId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - estado: concluido
+          título: título
+          tarefaId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dataVencimento: 2000-01-23
+    tarefasPadrao:
+      type: array
+      example:
+        tarefaId: 550e8400-e29b-41d4-a726-446655440044
+        título: Terminar Relatorio
+        descrição: Corrigir relatório sobre o desempenho mensal
+        dataVencimento: 2023-11-30T00:00:00.000Z
+        prioridade: 19
+        estado: Hoje
+      items:
+        $ref: '#/components/schemas/tarefasPadrao_inner'
+    tarefaPadraosUser:
+      required:
+      - tarefasId
+      - userId
+      properties:
+        userId:
+          $ref: '#/components/schemas/User'
+        tarefasId:
+          $ref: '#/components/schemas/tarefasPadrao'
+      example:
+        userId: 550e5400-e29b-41d4-a726-446655440044
+        tarefas:
+          tarefaId: 550e8400-e29b-41d4-a726-446655440044
+    User:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        nome:
+          type: string
+        apelido:
+          type: string
+        email:
+          pattern: "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+[^@ \\t\\r\\n]+"
+          type: string
+        password:
+          type: string
+        contacto:
+          pattern: "9[0-9]{2}[0-9]{3}[0-9]{3}$"
+          type: string
+      example:
+        password: password
+        contacto: 912345678
+        apelido: apelido
+        nome: nome
+        email: email@hotmail.com
+    userId:
+      required:
+      - UserId
+      type: object
+      properties:
+        userId:
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+          type: string
+          format: uuid
+      example:
+        userId: 550e5410-e29b-41d4-a726-446655440044
+    tarefaId:
+      required:
+      - tarefaId
+      type: object
+      properties:
+        tarefaId:
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+          type: string
+          format: uuid
+      example:
+        tarefaId: 550e5400-e29b-41d4-a726-446665440044
+    Login:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          pattern: "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+[^@ \\t\\r\\n]+"
+          type: string
+        password:
+          type: string
+      example:
+        email: email@hotmail.com~
+        password: password
+    userId_Estado_body:
+      required:
+      - novaEstado
+      type: object
+      properties:
+        novaEstado:
+          type: string
+          enum:
+          - Concluido
+          - Hoje
+          - Em Progresso
+          - Vencido
+    tarefaId_dataVencimento_body:
+      allOf:
+      - $ref: '#/components/schemas/tarefasPadrao'
+      - type: object
+        properties:
+          descricao:
+            type: string
+    listaDeTodasTarefas_tarefas:
+      type: object
+      properties:
+        tarefaId:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          description: O ID do usuário associado à tarefa.
+          format: uuid
+        título:
+          minLength: 1
+          type: string
+          description: O título da tarefa.
+        estado:
+          type: string
+          description: "O estado da tarefa (concluido, em progresso ou futuro)."
+          enum:
+          - concluido
+          - Hoje
+          - Agendado
+      example:
+        estado: concluido
+        título: título
+        tarefaId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        userId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    tarefasPadrao_inner:
+      required:
+      - dataVencimento
+      - descrição
+      - estado
+      - prioridade
+      - tarefaId
+      - título
+      properties:
+        dataVencimento:
+          type: string
+          description: A data de vencimento da tarefa (ISO 8601).
+          format: date
+        descrição:
+          maxLength: 200
+          minLength: 10
+          type: string
+          description: A descrição da tarefa.
+        estado:
+          type: string
+          description: "O estado da tarefa (concluído, em progresso ou futuro)."
+          enum:
+          - concluido
+          - Hoje
+          - Agendado
+        prioridade:
+          maximum: 20
+          minimum: 0
+          pattern: "^[0-9]+$"
+          type: integer
+          description: A prioridade da tarefa (de 0 a 20).
+        tarefaId:
+          pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+          type: string
+          format: uuid
+        título:
+          maxLength: 30
+          minLength: 4
+          type: string
+          description: O título da tarefa.
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
