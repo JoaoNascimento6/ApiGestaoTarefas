@@ -4,19 +4,23 @@
 ![Node.js](https://img.shields.io/badge/Node.js-v14.17-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
-The goal of this project is to create a RESTful API in Node.js to manage tasks, allowing users to create, update, delete, and list tasks. This API is designed to seamlessly integrate with various task management applications such as to-do lists, calendars, and more.
+Welcome to our Task Management API, designed to empower you in organizing tasks effortlessly! Built with Node.js, this API simplifies task handling, allowing creation, updating, deletion, and listing of tasks. Seamlessly integrates with your favorite task management tools like to-do lists and calendars.
 
 ## Key Features
 
-- **Task Creation:** Users can create new tasks by specifying title, description, due date, priority, and status.
-- **Task Update:** Ability to mark tasks as completed, change statuses, and modify fields.
-- **Task Deletion:** Elimination of tasks based on their unique ID.
-- **Task Listing:** Visualization of all registered tasks, with filtering options based on different criteria.
+- **Task Creation:** Craft new tasks with titles, descriptions, due dates, priorities, and statuses.
+- **Task Update:** Mark tasks as completed, tweak statuses, and modify various fields.
+- **Task Deletion:** Bid farewell to tasks using their unique ID.
+- **Task Listing:** Visualize all registered tasks with flexible filtering options.
+
+## Dive into the Docs!
+
+Explore the comprehensive [Task Management API Swagger Documentation](https://app.swaggerhub.com/apis-docs/JOAOPNASCIMENTO6/Todo/1.0) for detailed insights. It's your gateway to understanding endpoints, parameters, and responses in an OpenAPI format.
 
 ## Technical Requirements
 
-- The API follows RESTful principles, providing responses in JSON format.
-- Proper error handling, including HTTP status codes and descriptive error messages.
-- Implementation of basic authentication, such as API tokens, ensuring security and authenticity.
-- Use of a database, which can be relational (e.g., MySQL) or NoSQL (e.g., MongoDB).
-- Clear API documentation in OpenAPI format, describing endpoints, parameters, and responses.
+- Embraces RESTful principles, delivering responses in JSON format.
+- Handles errors gracefully with descriptive messages and HTTP status codes.
+- Implements secure basic authentication like API tokens for data security.
+- Leverages either relational (e.g., MySQL) or NoSQL (e.g., MongoDB) databases.
+- Provides clear OpenAPI format documentation defining endpoints, parameters, and responses.
