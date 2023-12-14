@@ -4,7 +4,7 @@ info:
   description: Manage your life with TOdo
   version: "1.0"
 servers:
-- url: https://virtserver.swaggerhub.com/JOAOPNASCIMENTO6/Todo/1.0
+- url: /
   description: SwaggerHub API Auto Mocking
 paths:
   /listartarefas/{userId}:

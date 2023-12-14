@@ -97,6 +97,7 @@ exports.userLoginGET = function(user,password) {
  *
  * no response value expected for this operation
  **/
+
 exports.userLogoutGET = function() {
   return new Promise(function(resolve, reject) {
     resolve();
