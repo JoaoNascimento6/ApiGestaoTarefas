@@ -1,5 +1,5 @@
 'use strict';
-
+const mongoose = require('mongoose')
 
 /**
  * Atualizar a descrição de uma tarefa por ID
