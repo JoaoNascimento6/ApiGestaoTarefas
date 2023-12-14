@@ -14,7 +14,7 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   if(arg1 && arg1 instanceof ResponsePayload) {
     writeJson(response, arg1.payload, arg1.code);
     return;
-  }
+  } 
 
   if(arg2 && Number.isInteger(arg2)) {
     code = arg2;

@@ -1,47 +1,57 @@
 'use strict';
 
-const path = require('path');
-const http = require('http');
-const { MongoClient } = require('mongodb');
-const oas3Tools = require('oas3-tools');
+var path = require('path');
+var http = require('http');
+const mongoose = require('mongoose')
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://admin:12345@apitodo.twkieed.mongodb.net/?retryWrites=true&w=majority";
 
-const serverPort = 8080;
+var oas3Tools = require('oas3-tools');
+var serverPort = 8080;
 
-// SwaggerRouter configuration
-const options = {
-  routing: {
-    controllers: path.join(__dirname, './controllers')
-  },
+// swaggerRouter configuration
+var options = {
+    routing: {
+        controllers: path.join(__dirname, './controllers')
+    },
 };
 
-const expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
-const app = expressAppConfig.getApp();
+var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
+var app = expressAppConfig.getApp();
 
-// MongoDB configuration
-const mongoURL = 'mongodb://localhost:27017'; // Altere conforme necessário
-const dbName = 'nome-do-seu-banco-de-dados';
-const usuariosCollectionName = 'usuarios';
-
-// Connect to MongoDB
-MongoClient.connect(mongoURL, { useUnifiedTopology: true }, (err, client) => {
-  if (err) {
-    console.error('Erro ao conectar-se ao MongoDB:', err);
-    return;
-  }
-
-  console.log('Conectado ao MongoDB');
-
-  // Select the database and collection
-  const db = client.db(dbName);
-  const usuariosCollection = db.collection(usuariosCollectionName);
-
-  // Add MongoDB connection to app for use in controllers
-  app.set('mongoClient', client);
-  app.set('usuariosCollection', usuariosCollection);
-
-  // Initialize the Swagger middleware
-  http.createServer(app).listen(serverPort, function () {
+// Initialize the Swagger middleware
+http.createServer(app).listen(serverPort, function () {
     console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
     console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
-  });
 });
+
+mongoose.connect(uri)
+.then(()=>{
+
+    console.log('connected to mongoDB')
+}).catch(()=>{
+    console.log('error')
+})
+
+
+const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+
+  async function run() {
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      // Send a ping to confirm a successful connection
+      await client.db("admin").command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
