@@ -2,18 +2,30 @@
 
 const path = require('path');
 const http = require('http');
-const express = require('express');
+
+var oas3Tools = require('oas3-tools');
+
 const mongoose = require('mongoose');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://admin:12345@apitodo.twkieed.mongodb.net/?retryWrites=true&w=majority";
+
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
 const swaggerDocument = YAML.load(path.join(__dirname, 'api/openapi.yaml'));
 
-const app = express();
+
 
 const PORT = process.env.PORT || 8080;
+
+var options = {
+  routing: {
+      controllers: path.join(__dirname, './controllers')
+  },
+};
+
+var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
+var app = expressAppConfig.getApp();
 
 http.createServer(app).listen(PORT, () => {
   console.log(`Seu servidor está ouvindo na porta ${PORT} (http://localhost:${PORT})`);
