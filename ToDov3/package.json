@@ -17,6 +17,7 @@
     "express-session": "^1.17.3",
     "js-yaml": "^3.3.0",
     "mongoose": "^8.0.3",
+    "oas3-tools": "^2.2.3",
     "swagger-ui-express": "^4.1.6",
     "yamljs": "^0.3.0"
   }

@@ -1,47 +1,24 @@
 'use strict';
 
-const path = require('path');
-const http = require('http');
-const express = require('express');
-const mongoose = require('mongoose');
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://admin:12345@apitodo.twkieed.mongodb.net/?retryWrites=true&w=majority";
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
+var path = require('path');
+var http = require('http');
 
-const swaggerDocument = YAML.load(path.join(__dirname, 'api/openapi.yaml'));
+var oas3Tools = require('oas3-tools');
+var serverPort = 8080;
 
-const app = express();
+// swaggerRouter configuration
+var options = {
+    routing: {
+        controllers: path.join(__dirname, './controllers')
+    },
+};
 
-const PORT = process.env.PORT || 8080;
+var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
+var app = expressAppConfig.getApp();
 
-http.createServer(app).listen(PORT, () => {
-  console.log(`Seu servidor está ouvindo na porta ${PORT} (http://localhost:${PORT})`);
-  console.log(`Swagger-ui está disponível em http://localhost:${PORT}/api-docs`);
+// Initialize the Swagger middleware
+http.createServer(app).listen(serverPort, function () {
+    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
 });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-mongoose.connect(uri)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(() => console.log('Error connecting to MongoDB'));
-
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function run() {
-  try {
-    await client.connect();
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    await client.close();
-  }
-}
-
-run().catch(console.dir);
