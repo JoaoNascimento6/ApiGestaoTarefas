@@ -176,14 +176,14 @@ paths:
           example: 550e8400-e29b-41d4-a726-446655440044
       - name: estado
         in: path
-        description: "Estado da tarefa (concluido, hoje, em progresso, futuro)."
+        description: "Estado da tarefa (Concluido, hoje, em progresso, futuro)."
         required: true
         style: simple
         explode: false
         schema:
           type: string
           enum:
-          - concluido
+          - Concluido
           - Hoje
           - em progresso
           - futuro
@@ -759,9 +759,9 @@ components:
           description: A prioridade da tarefa (de 0 a 20).
         estado:
           type: string
-          description: "O estado da tarefa (concluido, em progresso ou futuro)."
+          description: "O estado da tarefa (Concluido, em progresso ou futuro)."
           enum:
-          - concluido
+          - Concluido
           - Hoje
           - Agendado
       example:
@@ -771,7 +771,7 @@ components:
         descrição: Escrever um relatório sobre o desempenho mensal da equipe
         dataVencimento: 2023-12-31T23:59:59.999Z
         prioridade: 15
-        estado: concluido
+        estado: Concluido
     listaTarefasPadrao:
       type: array
       items:
@@ -800,7 +800,7 @@ components:
           type: string
           description: "O estado da tarefa (concluído, em progresso ou futuro)."
           enum:
-          - concluido
+          - Concluido
           - Hoje
           - Agendado
         prioridade:
@@ -871,7 +871,7 @@ components:
           descrição: Escrever um relatório sobre o desempenho mensal da equipe
           dataVencimento: 2023-12-31T23:59:59.999Z
           prioridade: 15
-          estado: concluido
+          estado: Concluido
         - tarefaId: 550e8400-e29b-41d4-a716-446655440045
           userId: 550e8400-e29b-41d4-a716-446655440078
           título: Reunião de Avaliação
@@ -893,7 +893,7 @@ components:
     listaDeTarefasEstado:
       type: array
       example:
-      - estado: concluido
+      - estado: Concluido
         tarefas:
         - tarefaId: 550e8400-e29b-41d4-a716-446655440044
           userId: 550e8400-e29b-41d4-a716-446655440077
@@ -901,7 +901,7 @@ components:
           descrição: Escrever um relatório sobre o desempenho mensal da equipe
           dataVencimento: 2023-12-31T23:59:59.999Z
           prioridade: 15
-          estado: concluido
+          estado: Concluido
       - estado: Hoje
         tarefas:
         - tarefaId: 550e8400-e29b-41d4-a716-446655440045
@@ -940,7 +940,7 @@ components:
           descrição: Escrever um relatório sobre o desempenho mensal da   equipe
           dataVencimento: 2023-12-31T23:59:59.999Z
           prioridade: 15
-          estado: concluido
+          estado: Concluido
         - tarefaId: 550e8400-e29b-41d4-a716-446655440045
           userId: 550e8400-e29b-41d4-a716-446655440077
           título: Reunião com a Equipe
@@ -985,7 +985,7 @@ components:
           descrição: Escrever um relatório sobre o desempenho mensal da equipe
           dataVencimento: 2023-12-31T23:59:59.999Z
           prioridade: 15
-          estado: concluido
+          estado: Concluido
         - tarefaId: 550e8400-e29b-41d4-a716-446655440045
           userId: 550e8400-e29b-41d4-a716-446655440077
           título: Reunião com a Equipe
@@ -1046,7 +1046,7 @@ components:
           type: string
           description: "O estado da tarefa (concluído, em progresso ou futuro)."
           enum:
-          - concluido
+          - Concluido
           - Hoje
           - Agendado
         prioridade:
@@ -1102,7 +1102,7 @@ components:
           type: string
           description: "O estado da tarefa (concluído, em progresso ou futuro)."
           enum:
-          - concluido
+          - Concluido
           - Hoje
           - Agendado
         tarefas:
